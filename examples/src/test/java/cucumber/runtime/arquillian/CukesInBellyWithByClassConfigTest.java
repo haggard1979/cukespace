@@ -1,23 +1,23 @@
 package cucumber.runtime.arquillian;
 
-import cucumber.api.CucumberOptions;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
-import cucumber.api.junit.Cucumber;
-import cucumber.runtime.arquillian.api.Features;
-import cucumber.runtime.arquillian.api.Tags;
-import cucumber.runtime.arquillian.domain.Belly;
+import static org.jboss.shrinkwrap.api.ShrinkWrap.create;
+import static org.junit.Assert.assertEquals;
+
+import javax.inject.Inject;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.runner.RunWith;
 
-import javax.inject.Inject;
-
-import static org.jboss.shrinkwrap.api.ShrinkWrap.create;
-import static org.junit.Assert.assertEquals;
+import cucumber.api.CucumberOptions;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+import cucumber.runtime.arquillian.api.Features;
+import cucumber.runtime.arquillian.api.Tags;
+import cucumber.runtime.arquillian.domain.Belly;
 
 @RunWith(CukeSpace.class)
 @Features("src/test/resources/cucumber/runtime/arquillian/feature") // folder on the file system
