@@ -172,6 +172,8 @@ public class ArquillianCucumber extends Arquillian {
 	public void performInternalCucumberOperations(final Object testInstance, final RunNotifier runNotifier)
 			throws Exception {
 
+		final Properties cukespaceConfigurationProperties = loadCucumberConfigurationProperties(configurationInputStream);
+		
 		final RuntimeOptions runtimeOptions = loadRuntimeOptions(javaTestClass, cukespaceConfigurationProperties);        
 
         final boolean reported = Boolean.parseBoolean(cukespaceConfigurationProperties.getProperty(CucumberConfiguration.REPORTABLE, "false"));
@@ -395,7 +397,12 @@ public class ArquillianCucumber extends Arquillian {
 			FileWriter writer = null;
 			try {
 				writer = new FileWriter(destination);
-				writer.write(reportBuilder.toString());
+				String jsonString = reportBuilder.toString();
+                //Hack until cucumber-reporting 1.3.0 availiable
+                if (jsonString.contains("# language: de")) {
+                	jsonString = jsonString.replace("Szenario", "Scenario");
+                }
+                writer.write(jsonString);
 				writer.flush();
 			} catch (final IOException e) {
 				if (writer != null) {
